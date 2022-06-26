@@ -13,45 +13,45 @@ import java.util.HashMap;
  */
 public class Convert {
 
-    public void putHashMap(HashMap<String, String> valueHex) {
-        valueHex.put("0000", "0");
-        valueHex.put("0001", "1");
-        valueHex.put("0010", "2");
-        valueHex.put("0011", "3");
-        valueHex.put("0100", "4");
-        valueHex.put("0101", "5");
-        valueHex.put("0110", "6");
-        valueHex.put("0111", "7");
-        valueHex.put("1000", "8");
-        valueHex.put("1001", "9");
-        valueHex.put("1010", "A");
-        valueHex.put("1011", "B");
-        valueHex.put("1100", "C");
-        valueHex.put("1101", "D");
-        valueHex.put("1110", "E");
-        valueHex.put("1111", "F");
+    public void putHashMap(HashMap<String, String> convertTable) {
+        convertTable.put("0000", "0");
+        convertTable.put("0001", "1");
+        convertTable.put("0010", "2");
+        convertTable.put("0011", "3");
+        convertTable.put("0100", "4");
+        convertTable.put("0101", "5");
+        convertTable.put("0110", "6");
+        convertTable.put("0111", "7");
+        convertTable.put("1000", "8");
+        convertTable.put("1001", "9");
+        convertTable.put("1010", "A");
+        convertTable.put("1011", "B");
+        convertTable.put("1100", "C");
+        convertTable.put("1101", "D");
+        convertTable.put("1110", "E");
+        convertTable.put("1111", "F");
     }
 
-    public String convertBinarytOther(HashMap<String, String> valueHex) {
+    public String convertBinarytOther(HashMap<String, String> convertTable) {
         GetInput input = new GetInput();
         System.out.println("---- Convert binary number to 10 or 16 ----");
         System.out.println("1. Conver to 10");
         System.out.println("2. Convert to 16");
         int choice = input.getIntLimit("Enter your choice: ", 1, 2);
         String inputBin = input.getInputBinary("Enter binary number: ");
-        BigInteger sum = new BigInteger("0");
-        BigInteger bin = new BigInteger("2");
         String result = "";
         switch (choice) {
             case 1:
-                BigInteger value;
+                BigInteger sumValue = new BigInteger("0");
+                BigInteger bin = new BigInteger("2");
+                BigInteger temp;
                 for (int i = 0; i < inputBin.length(); i++) {
                     if (inputBin.charAt(i) == '1') {
-                        value = bin.pow(inputBin.length() - 1 - i);
-                        sum = sum.add(value);
+                        temp = bin.pow(inputBin.length() - 1 - i);
+                        sumValue = sumValue.add(temp);
                     }
                 }
-                result = sum.toString();
+                result = sumValue.toString();
                 System.out.print("Decimal number: ");
                 System.out.println(result);
                 break;
@@ -61,43 +61,11 @@ public class Convert {
                 }
                 for (int i = 0; i < inputBin.length(); i += 4) {
                     String key = inputBin.substring(i, i + 4);
-                    result += valueHex.get(key);
+                    result += convertTable.get(key);
                 }
                 System.out.print("Hexadecimal number: ");
                 System.out.println(result);
                 break;
-//                String decNumber;
-//                BigInteger value1;
-//                for (int i = 0; i < inputBin.length(); i++) {
-//                    if (inputBin.charAt(i) == '1') {
-//                        value1 = bin.pow(inputBin.length() - 1 - i);
-//                        sum = sum.add(value1);
-//                    }
-//                }
-//                decNumber = sum.toString();
-//                BigInteger number = new BigInteger(decNumber);
-//                BigInteger hex = new BigInteger("16");
-//                BigInteger temp = new BigInteger("0");
-//                String count = "";
-//                char c;
-//                while (!number.equals(new BigInteger("0"))) {
-//                    temp = number.mod(hex);
-//                    if (temp.compareTo(new BigInteger("10")) < 0) {
-//                        c = (char) (temp.intValue() + 48);
-//                        count += c;
-//                    } else {
-//                        c = (char) (temp.intValue() + 55);
-//                        count += c;
-//                    }
-//                    number = number.divide(hex);
-//                }
-//                for (int i = count.length() - 1; i >= 0; i--) {
-//                    result += count.charAt(i);
-//                }
-//                System.out.print("Hexadecimal number: ");
-//                System.out.println(result);
-//                break;
-
         }
         return result;
     }
@@ -110,40 +78,39 @@ public class Convert {
         int choice = input.getIntLimit("Enter your choice: ", 1, 2);
         String inputDec = input.getInputDecimal("Enter decimal number: ");
         BigInteger number = new BigInteger(inputDec);
-        BigInteger temp = new BigInteger("0");
+        BigInteger temp;
+        String sumValue = "";
         String result = "";
         switch (choice) {
             case 1:
                 BigInteger bin = new BigInteger("2");
-                String cnt = "";
                 while (!number.equals(new BigInteger("0"))) {
                     temp = number.mod(bin);
-                    cnt += temp;
+                    sumValue += temp;
                     number = number.divide(bin);
                 }
-                for (int i = cnt.length() - 1; i >= 0; i--) {
-                    result += cnt.charAt(i);
+                for (int i = sumValue.length() - 1; i >= 0; i--) {
+                    result += sumValue.charAt(i);
                 }
                 System.out.print("Binary number: ");
                 System.out.println(result);
                 break;
             case 2:
                 BigInteger hex = new BigInteger("16");
-                String count = "";
-                char c;
+                char value;
                 while (!number.equals(new BigInteger("0"))) {
                     temp = number.mod(hex);
                     if (temp.compareTo(new BigInteger("10")) < 0) {
-                        c = (char) (temp.intValue() + 48);
-                        count += c;
+                        value = (char) (temp.intValue() + 48);
+                        sumValue += value;
                     } else {
-                        c = (char) (temp.intValue() + 55);
-                        count += c;
+                        value = (char) (temp.intValue() + 55);
+                        sumValue += value;
                     }
                     number = number.divide(hex);
                 }
-                for (int i = count.length() - 1; i >= 0; i--) {
-                    result += count.charAt(i);
+                for (int i = sumValue.length() - 1; i >= 0; i--) {
+                    result += sumValue.charAt(i);
                 }
                 System.out.print("Hexadecimal number: ");
                 System.out.println(result);
@@ -152,59 +119,39 @@ public class Convert {
         return result;
     }
 
-    public String convertHexadecimaltOther(HashMap<String, String> valueHex) {
+    public String convertHexadecimaltOther(HashMap<String, String> convertTable) {
         GetInput input = new GetInput();
-        String hstring = "0123456789ABCDEF";
         System.out.println("---- Convert hexadecimal number to 2 or 10 ----");
         System.out.println("1. Convert to 2");
         System.out.println("2. Convert to 10");
         int choice = input.getIntLimit("Enter your choice: ", 1, 2);
         String inputHex = input.getInputHexadecimal("Enter hexadecimal number: ");
-        BigInteger num = new BigInteger("0");
-        BigInteger hex = new BigInteger("16");
-        BigInteger temp;
         String result = "";
         switch (choice) {
             case 1:
                 HashMap<String, String> reversedHashMap = new HashMap<>();
-                for (String key : valueHex.keySet()) {
-                    reversedHashMap.put(valueHex.get(key), key);
+                for (String key : convertTable.keySet()) {
+                    reversedHashMap.put(convertTable.get(key), key);
                 }
                 for (int i = 0; i < inputHex.length(); i++) {
                     String key = Character.toString(inputHex.charAt(i));
                     result += reversedHashMap.get(key);
                 }
-//                String decNumber;
-//                for (int i = 0; i < inputHex.length(); i++) {
-//                    int digit = hstring.indexOf(Character.toString(inputHex.charAt(i)));
-//                    BigInteger c = new BigInteger(Integer.toString(digit));
-//                    temp = c.multiply(hex.pow(inputHex.length() - 1 - i));
-//                    num = num.add(temp);
-//                }
-//                decNumber = num.toString();
-//                BigInteger number = new BigInteger(decNumber);
-//                BigInteger dec = new BigInteger("2");
-//                BigInteger md = new BigInteger("0");
-//                String cnt = "";
-//                while (!number.equals(new BigInteger("0"))) {
-//                    md = number.mod(dec);
-//                    cnt += md;
-//                    number = number.divide(dec);
-//                }
-//                for (int i = cnt.length() - 1; i >= 0; i--) {
-//                    result += cnt.charAt(i);
-//                }
                 System.out.print("Binary number: ");
                 System.out.println(result);
                 break;
             case 2:
+                BigInteger temp;
+                BigInteger sumValue = new BigInteger("0");
+                BigInteger hex = new BigInteger("16");
+                String hstring = "0123456789ABCDEF";
                 for (int i = 0; i < inputHex.length(); i++) {
                     int digit = hstring.indexOf(Character.toString(inputHex.charAt(i)));
-                    BigInteger c = new BigInteger(Integer.toString(digit));
-                    temp = c.multiply(hex.pow(inputHex.length() - 1 - i));
-                    num = num.add(temp);
+                    BigInteger stringDigit = new BigInteger(Integer.toString(digit));
+                    temp = stringDigit.multiply(hex.pow(inputHex.length() - 1 - i));
+                    sumValue = sumValue.add(temp);
                 }
-                result = num.toString();
+                result = sumValue.toString();
                 System.out.print("Decimal number: ");
                 System.out.println(result);
                 break;
