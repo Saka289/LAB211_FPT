@@ -28,11 +28,19 @@ public class ValidateProgram {
             System.out.print(msg);
             try {
                 input = sc.nextLine().trim();
-                if (!input.matches("^[0-9_ ]*$")) {
+                //regex; ^ start of input string, 
+                //[0-9] must number from 0 to 9, 
+                //$ end of input string, 
+                //* previous character can be repeated
+                if (!input.matches("^[0-9]*$")) {
                     throw new Exception();
                 } else if (input.isEmpty()) {
                     throw new Exception();
                 }
+                //regex; ^ start of input string, 
+                //[0-9] must number from 0 to 9, 
+                //$ end of input string,
+                //{10} must be 10 digíts
                 if (!input.matches("^[0-9]{10}$")) {
                     throw new Error();
                 }
@@ -56,7 +64,13 @@ public class ValidateProgram {
             System.out.print(msg);
             try {
                 input = sc.nextLine().trim();
-                if (!input.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+                //^ start of input string,
+                //[\\w} contain any word character (alphanumeric and underscore)
+                //\\. contain character .
+                //@ must contain character @
+                //{2, 4} from 2 to 4 characters
+                //$ end of input string,
+                if (!input.matches("^[\\w]+@([\\w]+\\.)+[\\w]{2,4}$")) {
                     throw new Exception();
                 }
                 loop = false;
@@ -78,8 +92,16 @@ public class ValidateProgram {
             try {
                 date = sc.nextLine();
                 if (date.isEmpty()) {
-                    throw new Exception();
+                    System.out.println("Date not empty!!!");
+                    continue;
                 }
+                //^ start of input string,
+                //? characters can repeat 0 or 1 times
+                //[0-3] must number from 0 to 3,
+                //[0-9] must number from 0 to 9, 
+                // / must contain character /
+                //{2} must be 2 digíts
+                //$ end of input string,
                 if (!date.matches("^[0-3]?[0-9]/[0-3]?[0-9]/(?:[0-9]{2})?[0-9]{2}$")) {
                     throw new Error();
                 }
@@ -87,7 +109,7 @@ public class ValidateProgram {
                 dateFormat.parse(date);
                 loop = false;
             } catch (Exception e) {
-                System.out.println("Invalid date!!!");
+                System.out.println("date does not exist!!!");
                 loop = true;
             } catch (Error e) {
                 System.out.println("Date to correct format(dd/mm/yyyy)");

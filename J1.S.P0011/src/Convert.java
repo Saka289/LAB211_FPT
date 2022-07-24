@@ -12,7 +12,7 @@ import java.util.HashMap;
  * @author Saka
  */
 public class Convert {
-
+    //function create convertTable 2 to 16 or 16 to 2
     public void putHashMap(HashMap<String, String> convertTable) {
         convertTable.put("0000", "0");
         convertTable.put("0001", "1");
@@ -31,7 +31,8 @@ public class Convert {
         convertTable.put("1110", "E");
         convertTable.put("1111", "F");
     }
-
+    
+    //function convert binary number to other number 
     public String convertBinarytOther(HashMap<String, String> convertTable) {
         GetInput input = new GetInput();
         System.out.println("---- Convert binary number to 10 or 16 ----");
@@ -69,7 +70,7 @@ public class Convert {
         }
         return result;
     }
-
+    //function convert decimal number to other number 
     public String convertDecimaltOther() {
         GetInput input = new GetInput();
         System.out.println("---- Convert decimal number to 2 or 16 ----");
@@ -118,7 +119,7 @@ public class Convert {
         }
         return result;
     }
-
+    //function convert hexadecimal number to other number
     public String convertHexadecimaltOther(HashMap<String, String> convertTable) {
         GetInput input = new GetInput();
         System.out.println("---- Convert hexadecimal number to 2 or 10 ----");

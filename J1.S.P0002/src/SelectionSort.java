@@ -14,11 +14,14 @@ import java.util.Scanner;
 public class SelectionSort {
 
     public static void main(String[] args) {
-        int n = checkInput("Enter number of array:\n");
-        int[] a = inputArray(n);
+//        int n = checkInput("Enter number of array:\n");
+//        int[] a = inputArray(n);
+//        boolean test = false;
+        boolean test = true;
+        int[] a = {5, 1, 12, -5, 16, 2, 12, 14};
         Display("Unsorted array: ", a);
-        Sort(a);
-        Display("\nSorted array: ", a);
+        Sort(a, test);
+        Display("Sorted array: ", a);
     }
 
     public static int checkInput(String msg) {
@@ -50,7 +53,7 @@ public class SelectionSort {
         return a;
     }
 
-    public static void Display(String msg, int a[]) {
+    public static void Display(String msg, int[] a) {
         System.out.print(msg);
         System.out.print("[");
         for (int i = 0; i < a.length; i++) {
@@ -59,19 +62,35 @@ public class SelectionSort {
                 System.out.print(", ");
             }
         }
-        System.out.print("]");
+        if (msg.equals("Unsorted array: ")) {
+            System.out.println("]");
+        } else {
+            System.out.print("]");
+        }
     }
-    
-    public static void Sort(int a[]) {
+
+    public static void Sort(int a[], boolean test) {
+        //loop through each element of the array
         for (int i = 0; i < a.length - 1; i++) {
-            int min = i;
+            //Loop find the minimum element in unsorted array
+            int min_index = i;
             for (int j = i + 1; j < a.length; j++) {
-                if (a[j] < a[min]) {
-                    min = j;
+                //compare each pair of elements
+                if (a[j] < a[min_index]) {
+                    min_index = j;
                 }
             }
-            int temp = a[min];
-            a[min] = a[i];
+            //function test selection sort algorithm
+            if (test == true && a[min_index] < a[i]) {
+                Display("", a);
+                System.out.println("\t" + a[i] + " swap " + a[min_index]);
+            } else if (test == true) {
+                Display("", a);
+                System.out.println("\t" + a[i] + ", " + "OK");
+            }
+            //Swap the find minimum element with the first element
+            int temp = a[min_index];
+            a[min_index] = a[i];
             a[i] = temp;
         }
     }
