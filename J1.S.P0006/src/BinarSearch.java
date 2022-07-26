@@ -154,7 +154,7 @@ public class BinarSearch {
             }
         }
         if (count == 0 && test == true) {
-            System.out.print("Step 5 (searched value is absent): ");
+            System.out.print("Step " + ++i + " (searched value is absent): ");
             for (int j = 0; j < array.length; j++) {
                 System.out.print(array[j] + " ");
             }
