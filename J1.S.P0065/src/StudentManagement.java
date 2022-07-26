@@ -17,11 +17,8 @@ import java.util.Set;
  */
 public class StudentManagement {
 
-    Scanner sc = new Scanner(System.in);
-    CheckInput input = new CheckInput();
-    HashMap<String, Double> map = new HashMap<>();
-
     public void createStudent(List<Student> list) {
+        CheckInput input = new CheckInput();
         System.out.println("====== Management Student Program ======");
         while (true) {
             String StudentName = input.getString("Name: ");
@@ -54,6 +51,7 @@ public class StudentManagement {
     }
 
     public HashMap<String, Double> getPercentTypeStudent(List<Student> list) {
+        HashMap<String, Double> map = new HashMap<>();
         int countA = 0;
         int countB = 0;
         int countC = 0;
@@ -88,11 +86,11 @@ public class StudentManagement {
         }
     }
 
-    public void displayClass() {
-        Set<Map.Entry<String, Double>> setHashMap = map.entrySet();
+    public void displayClass(List<Student> list) {
+        HashMap<String, Double> getPercentTypeStudent = getPercentTypeStudent(list);
+        Set<Map.Entry<String, Double>> setHashMap = getPercentTypeStudent.entrySet();
         System.out.println("--------Classification Info -----");
         for (Map.Entry<String, Double> classes : setHashMap) {
-//            System.out.printf(classes.getKey(), ": %.1f", classes.getValue(), "%");
             System.out.print(classes.getKey() + ":");
             System.out.printf(" %.1f", classes.getValue());
             System.out.println("%");

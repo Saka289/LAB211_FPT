@@ -23,6 +23,6 @@ public class Main {
         //Step 3: show on display Student
         sm.displayStudent(list);
         //Step 4: show on display class
-        sm.displayClass();
+        sm.displayClass(list);
     }
 }

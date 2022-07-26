@@ -13,6 +13,45 @@ import java.util.Scanner;
  */
 public class GetInput {
 
+    //[0-9] must be number from 0 to 9
+    //{10} must be 10 digits
+    private static final String PHONE_VALID_0 = "[0-9]{10}";
+
+    //[0-9] must be number from 0 to 9
+    //{3} must be 3 digits
+    //{4} must be 4 digits
+    //[-] must contain character - 
+    private static final String PHONE_VALID_1 = "[0-9]{3}[-][0-9]{3}[-][0-9]{4}";
+
+    //[0-9] must be number from 0 to 9
+    //{3} must be 3 digits
+    //{4} must be 4 digits
+    //[.] must contain character .
+    private static final String PHONE_VALID_2 = "[0-9]{3}[.][0-9]{3}[.][0-9]{4}";
+
+    //[0-9] must be number from 0 to 9
+    //{3} must be 3 digits
+    //{4} must be 4 digits
+    //[ ] must contain character " "
+    private static final String PHONE_VALID_3 = "[0-9]{3}[ ][0-9]{3}[ ][0-9]{4}";
+
+    //[0-9] must be number from 0 to 9
+    //{3} must be 3 digits
+    //{4} must be 4 digits
+    //[-] must contain character -
+    //[ ] must contain character " "
+    //[a-z0-9] contain number and aphabet 
+    //+ characters can repeat 1 or more times
+    private static final String PHONE_VALID_4 = "[0-9]{3}[-][0-9]{3}[-][0-9]{4}[ ][a-z0-9]+";
+
+    //[0-9] must be number from 0 to 9
+    //{3} must be 3 digits
+    //{4} must be 4 digits
+    //[-] must contain character -
+    //[(] must contain character (
+    //[)] must contain character )
+    private static final String PHONE_VALID_5 = "[(][0-9]{3}[)][-][0-9]{3}[-][0-9]{4}";
+
     public String getName(String msg) {
         Scanner sc = new Scanner(System.in);
         boolean loop = true;
@@ -24,7 +63,7 @@ public class GetInput {
                 if (input.isEmpty()) {
                     throw new Error();
                 }
-                if (!input.matches("(\\b[A-Z]{1}[a-z]+)( )([A-Z]{1}[a-z]+\\b)")) {
+                if (!input.matches("(\\b[a-zA-Z]{1}[a-z]+)( )([a-zA-Z]{1}[a-z]+\\b)")) {
                     throw new Exception();
                 }
                 loop = false;
@@ -73,7 +112,8 @@ public class GetInput {
                 if (input.isEmpty()) {
                     throw new Error();
                 }
-                if (!input.matches("[(]?[0-9]{3}[)]?[-. ]?[0-9]{3}[-. ]?[0-9]{4}" + "|[0-9]{3}[-][0-9]{3}[-][0-9]{4}[ a-z0-9]+")) {
+                if (!input.matches(PHONE_VALID_0) && !input.matches(PHONE_VALID_1) && !input.matches(PHONE_VALID_2)
+                        && !input.matches(PHONE_VALID_3) && !input.matches(PHONE_VALID_4) && !input.matches(PHONE_VALID_5)) {
                     throw new Exception();
                 }
                 loop = false;

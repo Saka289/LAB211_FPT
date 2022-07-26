@@ -70,10 +70,10 @@ public class SelectionSort {
     }
 
     public static void Sort(int a[], boolean test) {
-        //loop through each element of the array
+        //loop pass through each elements from beginning to before the last index of array 
         for (int i = 0; i < a.length - 1; i++) {
-            //Loop find the minimum element in unsorted array
             int min_index = i;
+            //loop pass through each elements from i+1 to end of array 
             for (int j = i + 1; j < a.length; j++) {
                 //compare each pair of elements
                 if (a[j] < a[min_index]) {

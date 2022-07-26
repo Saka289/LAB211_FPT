@@ -46,6 +46,9 @@ public class MyFile {
                     line = bufferedReader.readLine();
                 }
                 System.out.println("Bout: " + count);
+                if (count == 0) {
+                    System.out.println("Don't find word in file!!!");
+                }
                 loop = false;
             } catch (FileNotFoundException e) {
                 System.out.println("Do not find file!!!");
@@ -71,7 +74,7 @@ public class MyFile {
     public List<String> getFileNameContainsWordInDirectory1(String source, String word) throws IOException {
         boolean loop = true;
         do {
-            int count = 0;
+            int test = 0;
             System.out.println("-------- Find File By Word --------");
             source = input.getStringPath("Enter path: ");
             word = input.getStringWord("Enter word: ", "^[a-zA-Z0-9_ ]*$");
@@ -85,14 +88,14 @@ public class MyFile {
                 for (File file : listFile) {
                     if (file.isFile()) {
                         if (findFile(file.getAbsolutePath(), word) != null) {
-                            count++;
+                            test++;
                             System.out.println("file name " + file.getName());
                         }
                     } else {
                         throw new Exception();
                     }
                 }
-                if (count == 0) {
+                if (test == 0) {
                     throw new Error();
                 }
                 loop = false;
